@@ -133,33 +133,4 @@ public class Factory : MonoBehaviour
 
         Destroy(obj);
     }
-
-    public ICommand CreateCommand(CommandTypes commandType)
-    {
-        ICommand command = null;
-
-        switch (commandType)
-        {
-            case CommandTypes.SpawnCube:
-                command = new SpawnCubeCommand();
-                break;
-            case CommandTypes.SpawnSphere:
-                command = new SpawnSphereCommand();
-                break;
-            case CommandTypes.SpawnPlayer:
-                command = new SpawnPlayerCommand();
-                break;
-            case CommandTypes.Delete:
-                command = new DeleteCommand();
-                break;
-            case CommandTypes.SpawnWall:
-                command = new SpawnWallCommand();
-                break;
-            case CommandTypes.SpawnEnemySpawner:
-                command = new SpawnEnemySpawnerCommand();
-                break;
-        }
-
-        return command;
-    }
 }

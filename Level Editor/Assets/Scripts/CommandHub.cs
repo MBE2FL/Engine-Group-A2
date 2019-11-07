@@ -29,10 +29,6 @@ public enum ObjectTypes
 
 public class CommandHub : MonoBehaviour
 {
-    private const int MAX_COMMANDS = 32;
-    private Stack<ICommand> _commands = new Stack<ICommand>(MAX_COMMANDS);
-    private Stack<ICommand> _undoneCommands = new Stack<ICommand>(MAX_COMMANDS);
-    private ICommand _currentCommand = null;
     private Factory _factory = null;
     private const string DLL_NAME = "EditorPlugin";
     [SerializeField]
@@ -76,75 +72,6 @@ public class CommandHub : MonoBehaviour
         _factory = Factory.Instance;
     }
 
-    public void Execute(string command)
-    {
-        // Request a command from the factory
-        switch (command)
-        {
-            case "SpawnCube":
-                _currentCommand = _factory.CreateCommand(CommandTypes.SpawnCube);
-                break;
-            case "SpawnSphere":
-                _currentCommand = _factory.CreateCommand(CommandTypes.SpawnSphere);
-                break;
-            case "SpawnPlayer":
-                _currentCommand = _factory.CreateCommand(CommandTypes.SpawnPlayer);
-                break;
-            case "Delete":
-                _currentCommand = _factory.CreateCommand(CommandTypes.Delete);
-                break;
-            case "SpawnWall":
-                _currentCommand = _factory.CreateCommand(CommandTypes.SpawnWall);
-                break;
-            case "SpawnEnemySpawner":
-                _currentCommand = _factory.CreateCommand(CommandTypes.SpawnEnemySpawner);
-                break;
-            default:
-                return;
-        }
-
-        // Execute the current command
-        _currentCommand.Execute();
-        _commands.Push(_currentCommand);
-    }
-
-    public void Execute(ICommand command)
-    {
-        _currentCommand.Execute();
-        _commands.Push(_currentCommand);
-    }
-
-    public void Undo()
-    {
-        if (_commands.Count > 0)
-        {
-            // Perform last commands undo
-            _currentCommand.Undo();
-            _commands.Pop();
-            _undoneCommands.Push(_currentCommand);
-
-            // Set current command to the next command in the stack
-            if (_commands.Count > 0)
-                _currentCommand = _commands.Peek();
-            else
-                _currentCommand = null;
-        }
-        else
-            Debug.Log("No more commands to undo.");
-    }
-
-    public void Redo()
-    {
-        // Redo the last undone command
-        if (_undoneCommands.Count > 0)
-        {
-            _currentCommand = _undoneCommands.Pop();
-            _currentCommand.Execute();
-            _commands.Push(_currentCommand);
-        }
-        else
-            Debug.Log("No more commands to redo.");
-    }
 
     public void SaveLevel()
     {
