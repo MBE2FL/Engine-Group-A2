@@ -33,11 +33,11 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
             _rb.AddForce(transform.forward * _movementSpeed);
-        else if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
             _rb.AddForce(-transform.forward * _movementSpeed);
-        else if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
             _rb.AddForce(-transform.right * _movementSpeed);
-        else if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
             _rb.AddForce(transform.right * _movementSpeed);
     }
 }
