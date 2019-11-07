@@ -13,7 +13,7 @@ ExportedObj/
 .consulo/
 *.csproj
 *.unityproj
-*.tlog
+*.sln
 *.suo
 *.tmp
 *.user
@@ -34,3 +34,35 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Files built by Visual Studio (For C++ DLL project)
+!/PluginDev/**/*.sln
+/PluginDev**/*_i.c
+/PluginDev**/*_p.c
+/PluginDev**/*_h.h
+/PluginDev**/*.ilk
+/PluginDev**/*.meta
+/PluginDev**/*.obj
+/PluginDev**/*.iobj
+/PluginDev**/*.pch
+/PluginDev**/*.pdb
+/PluginDev**/*.ipdb
+/PluginDev**/*.pgc
+/PluginDev**/*.pgd
+/PluginDev**/*.rsp
+/PluginDev**/*.sbr
+/PluginDev**/*.tlb
+/PluginDev**/*.tli
+/PluginDev**/*.tlh
+/PluginDev**/*.tmp
+/PluginDev**/*.tmp_proj
+/PluginDev**/*_wpftmp.csproj
+/PluginDev**/*.log
+/PluginDev**/*.vspscc
+/PluginDev**/*.vssscc
+/PluginDev**/.builds
+/PluginDev**/*.pidb
+/PluginDev**/*.svclog
+/PluginDev**/*.scc
+/PluginDev**/*.tlog
+/PluginDev**/*.exp
