@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class PlayerJumpState : IPlayerState
+public class PlayerJumpState : Subject, IPlayerState
 {
     Movement _movement;
     Transform _playerTrans;
@@ -14,7 +14,12 @@ public class PlayerJumpState : IPlayerState
     float _angle = 0.0f;
     float _movementSpeed;
     float _adrenalineBoost;
+    bool firstJump = false;
 
+    public PlayerJumpState()
+    {
+        addObserver(AchievementManager.Instance);
+    }
     public void entry(Movement movement)
     {
         _movement = movement;
@@ -25,6 +30,12 @@ public class PlayerJumpState : IPlayerState
         _adrenalineBoost = movement.AdrenalineBoost;
 
         _playerRB.AddForce(_playerTrans.up * _movementSpeed * _adrenalineBoost * 40.0f);
+
+        if (!firstJump)
+        {
+            notify(_movement.gameObject, ObsEvent.Player_JUMPED);
+            firstJump = true;
+        }
 
     }
 
