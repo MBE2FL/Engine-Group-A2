@@ -27,6 +27,7 @@ public class AchievementManager : IObserver
                 break;
             case ObsEvent.ENEMY_DIED:
                 Debug.Log("Enemy Died");
+                enemyDied();
                 break;
             default:
                 break;
@@ -36,5 +37,11 @@ public class AchievementManager : IObserver
     private AchievementManager()
     {
 
+    }
+
+    void enemyDied()
+    {
+        ++EnemySpawner.Kills;
+        Debug.Log("Kills: " + EnemySpawner.Kills);
     }
 }

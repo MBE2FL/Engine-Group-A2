@@ -5,12 +5,25 @@ using UnityEngine;
 public class EnemyPool : Subject
 {
     [SerializeField]
-    int _poolSize = 20;
+    int _poolSize = 40;
     Queue<GameObject> _enemyPool;
     Factory _factory;
+    static EnemyPool _instance;
 
-    // Start is called before the first frame update
-    void Start()
+
+    public static EnemyPool Instance
+    {
+        get
+        {
+            if (_instance == null)
+                _instance = new EnemyPool();
+
+            return _instance;
+        }
+    }
+
+
+    private EnemyPool()
     {
         _enemyPool = new Queue<GameObject>(_poolSize);
         _factory = Factory.Instance;
@@ -26,8 +39,6 @@ public class EnemyPool : Subject
 
         addObserver(AchievementManager.Instance);
     }
-
-
 
 
     public GameObject getEnemy()
