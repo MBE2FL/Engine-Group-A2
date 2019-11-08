@@ -68,11 +68,12 @@ public class Movement : MonoBehaviour
                 adrenalineBoost = 1.5f;
                 _material.SetColor("_Color", Color.red);
             }
-            if(adrenalineTimer >= 10.0f)
+            if(adrenalineTimer >= 5.0f)
             {
                 adrenaline = false;
                 adrenalineBoost = 1;
                 adrenalineTimer = 0;
+                _material.SetColor("_Color", Color.white);
             }
             yield return new WaitForEndOfFrame();
         }
