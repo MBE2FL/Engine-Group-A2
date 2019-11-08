@@ -12,11 +12,66 @@ public class Movement : MonoBehaviour
     private Rigidbody _rb;
     private Material _material;
     private IEnumerator coroutine;
+    static IPlayerState _playerWalkState = new PlayerWalkState();
+    static IPlayerState _playerJumpState = new PlayerJumpState();
+    private IPlayerState _state = null;
+    private bool _onGround = true;
+
+    public float MovementSpeed
+    {
+        get
+        {
+            return _movementSpeed;
+        }
+        set
+        {
+            _movementSpeed = value;
+        }
+    }
+
+    public float AdrenalineBoost
+    {
+        get
+        {
+            return adrenalineBoost;
+        }
+        set
+        {
+            adrenalineBoost = value;
+        }
+    }
+
+    public static IPlayerState PlayerWalkState
+    {
+        get
+        {
+            return _playerWalkState;
+        }
+    }
+
+    public static IPlayerState PlayerJumpState
+    {
+        get
+        {
+            return _playerJumpState;
+        }
+    }
+
+    public bool OnGround
+    {
+        get
+        {
+            return _onGround;
+        }
+    }
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _material = GetComponent<Renderer>().material;
+
+        _state = _playerWalkState;
+        _state.entry(this);
     }
 
     // Start is called before the first frame update
@@ -27,26 +82,49 @@ public class Movement : MonoBehaviour
     }
 
     // Update is called once per frame
+    void Update()
+    {
+        IPlayerState state = _state.input();
+
+        if (state == null)
+        {
+            _state.update();
+        }
+        else
+        {
+            _state = state;
+            _state.entry(this);
+        }
+    }
+
+    // Update is called once per frame
     void FixedUpdate()
     {
-        // Move with WASD
-        //if (Input.GetKey(KeyCode.W))
-        //    transform.position += transform.forward * _movementSpeed;
-        //else if (Input.GetKey(KeyCode.S))
-        //    transform.position -= transform.forward * _movementSpeed;
-        //else if (Input.GetKey(KeyCode.A))
-        //    transform.position -= transform.right * _movementSpeed;
-        //else if (Input.GetKey(KeyCode.D))
-        //    transform.position += transform.right * _movementSpeed;
+        _state.fixedUpdate();
+    }
 
-        if (Input.GetKey(KeyCode.W))
-            _rb.AddForce(transform.forward * _movementSpeed * adrenalineBoost);
-        if (Input.GetKey(KeyCode.S))
-            _rb.AddForce(-transform.forward * _movementSpeed * adrenalineBoost);
-        if (Input.GetKey(KeyCode.A))
-            _rb.AddForce(-transform.right * _movementSpeed * adrenalineBoost);
-        if (Input.GetKey(KeyCode.D))
-            _rb.AddForce(transform.right * _movementSpeed * adrenalineBoost);
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Ground")
+        {
+            _onGround = true;
+        }
+    }
+
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if (collision.transform.tag == "Ground")
+    //    {
+    //        _onGround = true;
+    //    }
+    //}
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.tag == "Ground")
+        {
+            _onGround = false;
+        }
     }
 
     public bool getAdrenalineRush()
