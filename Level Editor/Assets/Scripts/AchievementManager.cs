@@ -6,6 +6,10 @@ public class AchievementManager : IObserver
 {
     static AchievementManager _instance;
 
+    Movement _playerMovement;
+    GameObject _target1;
+    GameObject _target2;
+
     [SerializeField]
     private int _killStreak = 10;
 
@@ -58,6 +62,7 @@ public class AchievementManager : IObserver
     private AchievementManager()
     {
         
+        
     }
 
     void PlayerMoved()
@@ -87,6 +92,8 @@ public class AchievementManager : IObserver
 
     void AdrenalineRush()
     {
+        _playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
+
         ++EnemySpawner.Kills;
         Debug.Log("Kills: " + EnemySpawner.Kills);
 

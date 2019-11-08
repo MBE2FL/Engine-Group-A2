@@ -67,6 +67,14 @@ public class Bullet : MonoBehaviour
 
                 BulletPool.Instance.reclaim(gameObject);
             }
+            if (obj.tag == "Target1")
+            {
+                obj.SetActive(false);
+            }
+            if (obj.tag == "Target2")
+            {
+                obj.SetActive(false);
+            }
         }
     }
 }
