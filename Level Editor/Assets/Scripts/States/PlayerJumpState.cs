@@ -15,8 +15,6 @@ public class PlayerJumpState : IPlayerState
     float _movementSpeed;
     float _adrenalineBoost;
 
-    float _jumpWalkDelay = 0.0f;
-
     public void entry(Movement movement)
     {
         _movement = movement;
@@ -32,9 +30,9 @@ public class PlayerJumpState : IPlayerState
 
     public IPlayerState input()
     {
-        if (_movement.OnGround && (_jumpWalkDelay >= 0.5f))
+        if (_movement.OnGround)
         {
-            _jumpWalkDelay = 0.0f;
+
             return Movement.PlayerWalkState;
         }
 
@@ -43,7 +41,6 @@ public class PlayerJumpState : IPlayerState
 
     public void update()
     {
-        _jumpWalkDelay += Time.deltaTime;
         // Camera follow player
         float horizontal = Input.GetAxis("Mouse X");
         //float vertical = Input.GetAxis("Mouse Y");

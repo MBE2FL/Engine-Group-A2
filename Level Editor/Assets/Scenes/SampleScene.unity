@@ -2724,6 +2724,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8236806302916582060, guid: 39b92f31db449814baf29bbd1c170069,
+        type: 3}
+      propertyPath: _movementSpeed
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8236806302916582062, guid: 39b92f31db449814baf29bbd1c170069,
         type: 3}
       propertyPath: m_Drag
