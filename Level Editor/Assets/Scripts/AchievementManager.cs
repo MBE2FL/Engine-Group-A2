@@ -8,7 +8,7 @@ public class AchievementManager : IObserver
 
     Movement _playerMovement;
     [SerializeField]
-    private int _killStreak = 2;
+    private int _killStreak = 10;
 
     public static AchievementManager Instance
     {
@@ -27,11 +27,24 @@ public class AchievementManager : IObserver
     {
         switch (_event)
         {
-            case ObsEvent.TEST_EVENT:
+            case ObsEvent.PLAYER_MOVED:
+                Debug.Log("Player moved... Nice");
                 break;
-            case ObsEvent.ENEMY_DIED:
-                Debug.Log("Enemy Died");
-                enemyDied();
+            case ObsEvent.TARGETS_DOWN:
+                Debug.Log("You learned to shoot... Nice");
+                break;
+            case ObsEvent.Player_JUMPED:
+                Debug.Log("You learned to jump... Nice");
+                break;
+            case ObsEvent.TUTORIAL_DONE:
+                Debug.Log("Your now a bunny killer... Nice");
+                break;
+            case ObsEvent.GAME_BEGINS:
+                Debug.Log("Let your Hatred consume you");
+                break;
+            case ObsEvent.ADRENALINE_RUSH:
+                Debug.Log("Adrenaline Rush Activate, Your a monster!");
+                AdrenalineRush();
                 break;
             default:
                 break;
@@ -44,7 +57,27 @@ public class AchievementManager : IObserver
         
     }
 
-    void enemyDied()
+    void PlayerMoved()
+    {
+
+    }
+
+    void TargetsDown()
+    {
+
+    }
+
+    void TutorialDone()
+    {
+
+    }
+
+    void GameBegins()
+    {
+
+    }
+
+    void AdrenalineRush()
     {
         ++EnemySpawner.Kills;
         Debug.Log("Kills: " + EnemySpawner.Kills);

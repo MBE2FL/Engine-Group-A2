@@ -4,8 +4,12 @@ using UnityEngine;
 
 public enum ObsEvent
 {
-    TEST_EVENT,
-    ENEMY_DIED
+    PLAYER_MOVED,
+    TARGETS_DOWN,
+    Player_JUMPED,
+    TUTORIAL_DONE,
+    GAME_BEGINS,
+    ADRENALINE_RUSH
 }
 
 public interface IObserver
