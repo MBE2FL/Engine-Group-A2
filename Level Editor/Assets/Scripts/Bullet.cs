@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
     //[SerializeField]
     //private int _force = 10;
     private bool _active = false;
+    private float _lifeTime = 2.0f;
+    private float _currTime = 0.0f;
 
     public bool Active
     {
@@ -22,6 +24,30 @@ public class Bullet : MonoBehaviour
             _active = value;
         }
     }
+
+    public float CurrTime
+    {
+        get
+        {
+            return _currTime;
+        }
+        set
+        {
+            _currTime = value;
+        }
+    }
+
+    private void Update()
+    {
+        if (_active)
+        {
+            _currTime += Time.deltaTime;
+
+            if (_currTime >= _lifeTime)
+                BulletPool.Instance.reclaim(gameObject);
+        }
+    }
+
 
     private void OnCollisionEnter(Collision collision)
     {
