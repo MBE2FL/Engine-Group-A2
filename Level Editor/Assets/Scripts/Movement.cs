@@ -84,6 +84,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(_onGround);
         IPlayerState state = _state.input();
 
         if (state == null)
