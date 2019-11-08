@@ -16,10 +16,15 @@ public class PlayerJumpState : Subject, IPlayerState
     float _adrenalineBoost;
     bool firstJump = false;
 
+<<<<<<< HEAD
     public PlayerJumpState()
     {
         addObserver(AchievementManager.Instance);
     }
+=======
+    float _jumpWalkDelay = 0.0f;
+
+>>>>>>> 6502a3415a36002de2145cf67d5eaac48e425b81
     public void entry(Movement movement)
     {
         _movement = movement;
@@ -41,9 +46,9 @@ public class PlayerJumpState : Subject, IPlayerState
 
     public IPlayerState input()
     {
-        if (_movement.OnGround)
+        if (_movement.OnGround && (_jumpWalkDelay >= 0.5f))
         {
-            Debug.Log("Jump to Walk");
+            _jumpWalkDelay = 0.0f;
             return Movement.PlayerWalkState;
         }
 
@@ -52,6 +57,7 @@ public class PlayerJumpState : Subject, IPlayerState
 
     public void update()
     {
+        _jumpWalkDelay += Time.deltaTime;
         // Camera follow player
         float horizontal = Input.GetAxis("Mouse X");
         //float vertical = Input.GetAxis("Mouse Y");

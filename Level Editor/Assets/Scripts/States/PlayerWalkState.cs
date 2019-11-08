@@ -29,8 +29,6 @@ public class PlayerWalkState : Subject, IPlayerState
         _playerRB = _movement.GetComponent<Rigidbody>();
         _movementSpeed = movement.MovementSpeed;
         _adrenalineBoost = movement.AdrenalineBoost;
-
-        Debug.Log("Walk entry");
     }
 
     public IPlayerState input()
