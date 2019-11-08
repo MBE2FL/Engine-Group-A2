@@ -62,7 +62,7 @@ public class EnemyPool : Subject
 
             _enemyPool.Enqueue(enemy);
 
-            notify(enemy, ObsEvent.ENEMY_DIED);
+            notify(enemy, ObsEvent.ADRENALINE_RUSH);
         }
     }
 }
