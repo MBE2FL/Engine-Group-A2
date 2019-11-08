@@ -42,7 +42,7 @@ public class BulletPool : MonoBehaviour
 
         for (int i = 0; i < _size; ++i)
         {
-            obj = Instantiate(_bullet, _bulletSpawn.transform);
+            obj = Instantiate(_bullet, _bulletSpawn.transform.position, Quaternion.identity);
             _inactivePool.Add(obj);
 
             obj.hideFlags = HideFlags.HideInHierarchy;
