@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
-public class CameraPlayerState : MonoBehaviour, ICameraState
+public class CameraPlayerState : ICameraState
 {
     Camera _cam;
     Transform _playerTrans = null;
     float _angle = 0.0f;
 
-    private void Start()
+    public CameraPlayerState()
     {
         _cam = Camera.main;
     }
@@ -49,8 +52,13 @@ public class CameraPlayerState : MonoBehaviour, ICameraState
 
         if (EnemySpawner.AllEnemiesDead)
         {
-            camControl.stop();
+            //camControl.stop();
+#if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
             Debug.Log("Game Over");
+#else
+            Application.Quit(0);
+#endif
         }
     }
 }

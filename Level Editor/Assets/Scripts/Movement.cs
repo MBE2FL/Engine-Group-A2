@@ -10,15 +10,20 @@ public class Movement : MonoBehaviour
     private bool adrenaline = false;
     float adrenalineTimer = 0.0f;
     private Rigidbody _rb;
+    private Material _material;
+    private IEnumerator coroutine;
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody>();    
+        _rb = GetComponent<Rigidbody>();
+        _material = GetComponent<Renderer>().material;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        coroutine = adrenalineRush();
+        StartCoroutine(coroutine);
     }
 
     // Update is called once per frame
@@ -44,11 +49,11 @@ public class Movement : MonoBehaviour
             _rb.AddForce(transform.right * _movementSpeed * adrenalineBoost);
     }
 
-    bool getAdrenalineRush()
+    public bool getAdrenalineRush()
     {
         return adrenaline;
     }
-    void setAdrenalineRush(bool booly)
+     public void setAdrenalineRush(bool booly)
     {
         adrenaline = booly;
     }
@@ -61,6 +66,7 @@ public class Movement : MonoBehaviour
             {
                 adrenalineTimer += Time.deltaTime;
                 adrenalineBoost = 1.5f;
+                _material.SetColor("_Color", Color.red);
             }
             if(adrenalineTimer >= 10.0f)
             {

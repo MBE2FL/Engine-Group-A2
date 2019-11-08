@@ -6,6 +6,10 @@ public class AchievementManager : IObserver
 {
     static AchievementManager _instance;
 
+    Movement _playerMovement;
+    [SerializeField]
+    private int _killStreak = 2;
+
     public static AchievementManager Instance
     {
         get
@@ -36,12 +40,16 @@ public class AchievementManager : IObserver
 
     private AchievementManager()
     {
-
+        _playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
+        
     }
 
     void enemyDied()
     {
         ++EnemySpawner.Kills;
         Debug.Log("Kills: " + EnemySpawner.Kills);
+
+        if ((EnemySpawner.Kills % _killStreak) == 0)
+            _playerMovement.setAdrenalineRush(true);
     }
 }

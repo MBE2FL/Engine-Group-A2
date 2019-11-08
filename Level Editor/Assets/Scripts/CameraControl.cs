@@ -7,46 +7,16 @@ using UnityEngine.AI;
 
 public class CameraControl : MonoBehaviour
 {
-    static CameraMoveState _moveState = null;
-    static CameraObjectSelectedState _objectSelectedState = null;
     static CameraPlayerState _playerState = null;
-    private GameObject _selectedObj;
     private ICameraState _state = null;
     [SerializeField]
     private Vector3 _camOffset = new Vector3(0.0f, 2.5f, -2.5f);
-    private GameObject _player;
-    private GameObject _canvas;
+    //private GameObject _player;
 
     private NavMeshSurface _navMeshSurface;
 
 
-    public GameObject SelectedObj
-    {
-        get
-        {
-            return _selectedObj;
-        }
-        set
-        {
-            _selectedObj = value;
-        }
-    }
 
-    public static CameraMoveState MoveState
-    {
-        get
-        {
-            return _moveState;
-        }
-    }
-
-    public static CameraObjectSelectedState ObjectSelectedState
-    {
-        get
-        {
-            return _objectSelectedState;
-        }
-    }
 
     public Vector3 CamOffset
     {
@@ -59,16 +29,14 @@ public class CameraControl : MonoBehaviour
 
     private void Awake()
     {
-        _moveState = gameObject.AddComponent<CameraMoveState>();
-        _objectSelectedState = gameObject.AddComponent<CameraObjectSelectedState>();
-        _playerState = gameObject.AddComponent<CameraPlayerState>();
-        _state = _moveState;
+        _playerState = new CameraPlayerState();
     }
 
     private void Start()
     {
-        _canvas = GameObject.Find("Canvas");
         _navMeshSurface = GameObject.Find("Ground").GetComponent<NavMeshSurface>();
+
+        play();
     }
 
 
@@ -151,48 +119,43 @@ public class CameraControl : MonoBehaviour
     public void play()
     {
         //Cursor.lockState = CursorLockMode.Locked;
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
 
-        Factory.Instance.CreateGameObject(ObjectTypes.Player, out _player);
+        //Factory.Instance.CreateGameObject(ObjectTypes.Player, out _player);
 
         _state = _playerState;
         _state.entry(this);
 
-        foreach (Transform child in _canvas.transform)
-        {
-            if (child.name != "Stop Button")
-                child.GetComponent<Button>().interactable = false;
-        }
 
         EnemySpawner.spawnersActive(true);
 
         _navMeshSurface.BuildNavMesh();
     }
 
-    public void stop()
-    {
-        if (_player)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            _state = _moveState;
-            _state.entry(this);
+    //public void stop()
+    //{
+    //    if (_player)
+    //    {
+    //        Cursor.lockState = CursorLockMode.None;
+    //        Cursor.visible = true;
+    //        _state = _moveState;
+    //        _state.entry(this);
 
-            Factory.Instance.DeleteGameObject(ref _player);
+    //        Factory.Instance.DeleteGameObject(ref _player);
 
-            foreach (Transform child in _canvas.transform)
-            {
-                child.GetComponent<Button>().interactable = true;
-            }
+    //        foreach (Transform child in _canvas.transform)
+    //        {
+    //            child.GetComponent<Button>().interactable = true;
+    //        }
 
-            EnemySpawner.spawnersActive(false);
+    //        EnemySpawner.spawnersActive(false);
 
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (GameObject enemy in enemies)
-            {
-                Destroy(enemy);
-            }
-        }
-    }
+    //        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+    //        foreach (GameObject enemy in enemies)
+    //        {
+    //            Destroy(enemy);
+    //        }
+    //    }
+    //}
 }
