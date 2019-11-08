@@ -6,6 +6,9 @@ public class Movement : MonoBehaviour
 {
     [SerializeField]
     private float _movementSpeed = 1.0f;
+    private float adrenalineBoost = 1.0f;
+    private bool adrenaline = false;
+    float adrenalineTimer = 0.0f;
     private Rigidbody _rb;
 
     private void Awake()
@@ -32,12 +35,40 @@ public class Movement : MonoBehaviour
         //    transform.position += transform.right * _movementSpeed;
 
         if (Input.GetKey(KeyCode.W))
-            _rb.AddForce(transform.forward * _movementSpeed);
+            _rb.AddForce(transform.forward * _movementSpeed * adrenalineBoost);
         if (Input.GetKey(KeyCode.S))
-            _rb.AddForce(-transform.forward * _movementSpeed);
+            _rb.AddForce(-transform.forward * _movementSpeed * adrenalineBoost);
         if (Input.GetKey(KeyCode.A))
-            _rb.AddForce(-transform.right * _movementSpeed);
+            _rb.AddForce(-transform.right * _movementSpeed * adrenalineBoost);
         if (Input.GetKey(KeyCode.D))
-            _rb.AddForce(transform.right * _movementSpeed);
+            _rb.AddForce(transform.right * _movementSpeed * adrenalineBoost);
+    }
+
+    bool getAdrenalineRush()
+    {
+        return adrenaline;
+    }
+    void setAdrenalineRush(bool booly)
+    {
+        adrenaline = booly;
+    }
+
+    IEnumerator adrenalineRush()
+    {
+        while(true)
+        {
+            if (adrenaline)
+            {
+                adrenalineTimer += Time.deltaTime;
+                adrenalineBoost = 1.5f;
+            }
+            if(adrenalineTimer >= 10.0f)
+            {
+                adrenaline = false;
+                adrenalineBoost = 1;
+                adrenalineTimer = 0;
+            }
+            yield return new WaitForEndOfFrame();
+        }
     }
 }
