@@ -6,6 +6,7 @@ public class AchievementManager : IObserver
 {
     static AchievementManager _instance;
 
+    GameObject player;
     Movement _playerMovement;
     GameObject _target1;
     GameObject _target2;
@@ -82,7 +83,8 @@ public class AchievementManager : IObserver
 
     void TutorialDone()
     {
-
+        player = GameObject.FindGameObjectWithTag("Player");
+        player.transform.position = new Vector3(0, 1, 0);
     }
 
     void GameBegins()

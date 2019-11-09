@@ -2,23 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class tutorialWall : Subject
+public class tutorialDone : Subject
 {
-    GameObject wall;
+    GameObject TBun;
     // Start is called before the first frame update
-    public tutorialWall()
+    public tutorialDone()
     {
         addObserver(AchievementManager.Instance);
-
-        wall = GameObject.FindGameObjectWithTag("wall");
+        TBun = GameObject.FindGameObjectWithTag("TBun");
     }
 
     // Update is called once per frame
     public void Update()
     {
-        if(wall.activeInHierarchy == false)
+        if (TBun.activeInHierarchy == false)
         {
-            notify(null, ObsEvent.TARGETS_DOWN);
+            notify(null, ObsEvent.TUTORIAL_DONE);
 
         }
     }

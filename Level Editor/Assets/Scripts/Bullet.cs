@@ -75,6 +75,10 @@ public class Bullet : MonoBehaviour
             {
                 obj.SetActive(false);
             }
+            if(obj.tag == "TBunny")
+            {
+                obj.SetActive(false);
+            }
         }
     }
 }
