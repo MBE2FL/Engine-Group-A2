@@ -9,7 +9,7 @@ public class BulletPool : MonoBehaviour
     private List<GameObject> _inactivePool;
     private List<GameObject> _activePool;
     [SerializeField]
-    private int _size = 10;
+    private int _size = 20;
     private Transform _bulletSpawn;
     private static BulletPool _instance;
 
@@ -111,5 +111,6 @@ public class BulletPool : MonoBehaviour
 
         bullet.SetActive(false);
         bullet.GetComponent<Bullet>().Active = false;
+        bullet.GetComponent<Bullet>().CurrTime = 0.0f;
     }
 }

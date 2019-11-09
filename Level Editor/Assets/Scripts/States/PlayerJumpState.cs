@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class PlayerJumpState : IPlayerState
+public class PlayerJumpState : Subject, IPlayerState
 {
     Movement _movement;
     Transform _playerTrans;
@@ -14,8 +14,16 @@ public class PlayerJumpState : IPlayerState
     float _angle = 0.0f;
     float _movementSpeed;
     float _adrenalineBoost;
+    bool firstJump = false;
+
+
+    public PlayerJumpState()
+    {
+        addObserver(AchievementManager.Instance);
+    }
 
     float _jumpWalkDelay = 0.0f;
+
 
     public void entry(Movement movement)
     {
@@ -28,13 +36,19 @@ public class PlayerJumpState : IPlayerState
 
         _playerRB.AddForce(_playerTrans.up * _movementSpeed * _adrenalineBoost * 40.0f);
 
+        if (!firstJump)
+        {
+            notify(_movement.gameObject, ObsEvent.Player_JUMPED);
+            firstJump = true;
+        }
+
     }
 
     public IPlayerState input()
     {
-        if (_movement.OnGround && (_jumpWalkDelay >= 0.5f))
+        if (_movement.OnGround)
         {
-            _jumpWalkDelay = 0.0f;
+
             return Movement.PlayerWalkState;
         }
 
@@ -43,7 +57,6 @@ public class PlayerJumpState : IPlayerState
 
     public void update()
     {
-        _jumpWalkDelay += Time.deltaTime;
         // Camera follow player
         float horizontal = Input.GetAxis("Mouse X");
         //float vertical = Input.GetAxis("Mouse Y");

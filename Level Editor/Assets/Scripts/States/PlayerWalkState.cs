@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class PlayerWalkState : IPlayerState
+public class PlayerWalkState : Subject, IPlayerState
 {
     Movement _movement;
     Transform _playerTrans;
@@ -14,6 +14,12 @@ public class PlayerWalkState : IPlayerState
     float _angle = 0.0f;
     float _movementSpeed;
     float _adrenalineBoost;
+    bool firstMove = false;
+
+    public PlayerWalkState()
+    {
+        addObserver(AchievementManager.Instance);
+    }
 
     public void entry(Movement movement)
     {
@@ -64,14 +70,22 @@ public class PlayerWalkState : IPlayerState
     }
 
     public void fixedUpdate()
-    { 
+    {
         if (Input.GetKey(KeyCode.W))
+        {
             _playerRB.AddForce(_playerTrans.forward * _movementSpeed * _adrenalineBoost);
+            if (!firstMove)
+            {
+                notify(_movement.gameObject, ObsEvent.PLAYER_MOVED);
+                firstMove = true;
+            }
+        }
         if (Input.GetKey(KeyCode.S))
             _playerRB.AddForce(-_playerTrans.forward * _movementSpeed * _adrenalineBoost);
         if (Input.GetKey(KeyCode.A))
             _playerRB.AddForce(-_playerTrans.right * _movementSpeed * _adrenalineBoost);
         if (Input.GetKey(KeyCode.D))
             _playerRB.AddForce(_playerTrans.right * _movementSpeed * _adrenalineBoost);
+
     }
 }
