@@ -90,3 +90,17 @@ int FileManager::getNumObjs() const
 {
 	return _numObjs;
 }
+
+void FileManager::logMetrics(char* filePath, int kills, float accuracy, int adrenCounter)
+{
+	ofstream file(filePath, ios::out);
+
+	if (file.is_open())
+	{
+		file << "Kills: " << kills << std::endl;
+		file << "Accuracy: " << accuracy << std::endl;
+		file << "Number of times Adrenaline Rush was used: " << adrenCounter << std::endl;
+
+		file.close();
+	}
+}
