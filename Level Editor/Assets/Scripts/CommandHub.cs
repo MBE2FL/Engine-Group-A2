@@ -47,7 +47,7 @@ public class CommandHub : MonoBehaviour
     private static extern int getNumObjs();
 
     [DllImport(DLL_NAME)]
-    private static extern void logMetrics(string filePath, int kills, float accuracy);
+    private static extern void logMetrics(string filePath, int kills, float accuracy, int adrenCounter);
 
     public static CommandHub Instance
     {
@@ -77,7 +77,7 @@ public class CommandHub : MonoBehaviour
 
     public static void LogMetrics()
     {
-        logMetrics("Metrics.txt", EnemySpawner.Kills, (float)EnemySpawner.Kills / ((float)BulletPool.ShotsFired / 4.0f));
+        logMetrics("Metrics.txt", EnemySpawner.Kills, (float)EnemySpawner.Kills / ((float)BulletPool.ShotsFired / 4.0f), AchievementManager.adrenCounter);
         //Debug.Log("Accuracy: " + (float)EnemySpawner.Kills / ((float)BulletPool.ShotsFired / 4.0f));
     }
 

@@ -1,2 +1,3 @@
-Kills: 15
-Accuracy: 0.0614754
+Kills: 20
+Accuracy: 0.235988
+Number of times Adrenaline Rush was used: 2

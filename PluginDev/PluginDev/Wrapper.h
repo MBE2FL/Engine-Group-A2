@@ -12,7 +12,7 @@ extern "C"
 	PLUGIN_API void load(char* filePath, int stride);
 	PLUGIN_API float* getData();
 	PLUGIN_API int getNumObjs();
-	PLUGIN_API void logMetrics(char* filePath, int kills, float accuracy);
+	PLUGIN_API void logMetrics(char* filePath, int kills, float accuracy, int adrenCounter);
 
 
 #ifdef __cplusplus

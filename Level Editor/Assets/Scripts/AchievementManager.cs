@@ -10,6 +10,8 @@ public class AchievementManager : IObserver
     GameObject _target1;
     GameObject _target2;
 
+    public static int adrenCounter = 0;
+
     [SerializeField]
     private int _killStreak = 10;
 
@@ -100,6 +102,9 @@ public class AchievementManager : IObserver
         Debug.Log("Shots Fired: " + BulletPool.ShotsFired);
 
         if ((EnemySpawner.Kills % _killStreak) == 0)
+        {
             _playerMovement.setAdrenalineRush(true);
+            adrenCounter++;
+        }
     }
 }
