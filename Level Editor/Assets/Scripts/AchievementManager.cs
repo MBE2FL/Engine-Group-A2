@@ -91,7 +91,7 @@ public class AchievementManager : IObserver
 
     void GameBegins()
     {
-
+        EnemySpawner.spawnersActive(true);
     }
 
     void AdrenalineRush()

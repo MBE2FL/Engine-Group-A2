@@ -18,7 +18,7 @@ public class tutorialDone : Subject
         if (TBun.activeInHierarchy == false)
         {
             notify(null, ObsEvent.TUTORIAL_DONE);
-
+            notify(null, ObsEvent.GAME_BEGINS);
         }
     }
 }

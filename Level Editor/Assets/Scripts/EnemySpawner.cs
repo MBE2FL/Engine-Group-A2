@@ -82,6 +82,18 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    public bool SpawnerActive
+    {
+        get
+        {
+            return _active;
+        }
+        set
+        {
+            _active = value;
+        }
+    }
+
     public static bool AllEnemiesDead
     {
         get
