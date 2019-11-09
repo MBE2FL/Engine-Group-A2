@@ -80,7 +80,9 @@ public class AchievementManager : IObserver
     void AdrenalineRush()
     {
         ++EnemySpawner.Kills;
+        CommandHub.LogMetrics();
         Debug.Log("Kills: " + EnemySpawner.Kills);
+        Debug.Log("Shots Fired: " + BulletPool.ShotsFired);
 
         if ((EnemySpawner.Kills % _killStreak) == 0)
             _playerMovement.setAdrenalineRush(true);

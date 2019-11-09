@@ -13,6 +13,8 @@ public class BulletPool : MonoBehaviour
     private Transform _bulletSpawn;
     private static BulletPool _instance;
 
+    private static int shotsFired;
+
     public static BulletPool Instance
     {
         get
@@ -48,12 +50,25 @@ public class BulletPool : MonoBehaviour
             obj.hideFlags = HideFlags.HideInHierarchy;
             obj.SetActive(false);
         }
+
+        shotsFired = 0;
     }
 
-
+    public static int ShotsFired
+    {
+        get
+        {
+            return shotsFired;
+        }
+        set
+        {
+            shotsFired = value;
+        }
+    }
     public GameObject getBullet()
     {
         GameObject bullet;
+        shotsFired++;
 
         // Use from the inactive pool
         if (_inactivePool.Count > 0)

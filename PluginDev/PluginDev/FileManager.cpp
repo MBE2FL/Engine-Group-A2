@@ -90,3 +90,16 @@ int FileManager::getNumObjs() const
 {
 	return _numObjs;
 }
+
+void FileManager::logMetrics(char* filePath, int kills, float accuracy)
+{
+	ofstream file(filePath, ios::out);
+
+	if (file.is_open())
+	{
+		file << "Kills: " << kills << std::endl;
+		file << "Accuracy: " << accuracy << std::endl;
+
+		file.close();
+	}
+}

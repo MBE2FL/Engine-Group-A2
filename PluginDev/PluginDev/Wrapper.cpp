@@ -22,3 +22,8 @@ PLUGIN_API int getNumObjs()
 {
 	return fm.getNumObjs();
 }
+
+PLUGIN_API void logMetrics(char* filePath, int kills, float accuracy)
+{
+	return fm.logMetrics(filePath, kills, accuracy);
+}

@@ -95,6 +95,8 @@ public class EnemySpawner : MonoBehaviour
 
                 totalEnemies += spawner._maxEnemies;
             }
+            if (_kills == totalEnemies)
+                CommandHub.LogMetrics();
 
             return (_kills == totalEnemies);
         }

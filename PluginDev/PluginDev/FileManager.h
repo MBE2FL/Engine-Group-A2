@@ -20,6 +20,8 @@ public:
 	float* getData() const;
 	int getNumObjs() const;
 
+	void logMetrics(char* filePath, int kills, float accuracy);
+
 private:
 	float* _data = nullptr;
 	int _numObjs = 0;
