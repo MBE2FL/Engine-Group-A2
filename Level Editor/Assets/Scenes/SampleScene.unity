@@ -771,10 +771,10 @@ GameObject:
   - component: {fileID: 406091511}
   - component: {fileID: 406091514}
   - component: {fileID: 406091513}
-  - component: {fileID: 406091512}
+  - component: {fileID: 406091515}
   m_Layer: 0
   m_Name: Tutorial Bunny
-  m_TagString: Untagged
+  m_TagString: TBun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -794,19 +794,6 @@ Transform:
   m_Father: {fileID: 163419528}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 82.80801, z: 0}
---- !u!65 &406091512
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 406091510}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.60398674, y: 0.6923523, z: 1}
-  m_Center: {x: -0.0034637451, y: 0.34391022, z: 0}
 --- !u!23 &406091513
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -853,6 +840,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406091510}
   m_Mesh: {fileID: 4300000, guid: 0962bdca27eaca34aaa15f7fdf608faf, type: 3}
+--- !u!114 &406091515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406091510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed784c18b6be2448a1d76b984fcadb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &499015488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -923,7 +922,7 @@ PrefabInstance:
     - target: {fileID: 2340296072003890295, guid: 8c46bcd3b445cca4b8763e01dc3067e9,
         type: 3}
       propertyPath: _active
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c46bcd3b445cca4b8763e01dc3067e9, type: 3}
@@ -937,6 +936,14 @@ PrefabInstance:
     - target: {fileID: 100042, guid: 0962bdca27eaca34aaa15f7fdf608faf, type: 3}
       propertyPath: m_Name
       value: Rabbit
+      objectReference: {fileID: 0}
+    - target: {fileID: 100042, guid: 0962bdca27eaca34aaa15f7fdf608faf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100042, guid: 0962bdca27eaca34aaa15f7fdf608faf, type: 3}
+      propertyPath: m_TagString
+      value: TBunny
       objectReference: {fileID: 0}
     - target: {fileID: 400040, guid: 0962bdca27eaca34aaa15f7fdf608faf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1237,7 +1244,7 @@ PrefabInstance:
     - target: {fileID: 2340296072003890295, guid: 8c46bcd3b445cca4b8763e01dc3067e9,
         type: 3}
       propertyPath: _active
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c46bcd3b445cca4b8763e01dc3067e9, type: 3}
@@ -1456,6 +1463,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 841915324}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1082732333 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100042, guid: 0962bdca27eaca34aaa15f7fdf608faf,
+    type: 3}
+  m_PrefabInstance: {fileID: 652388639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1082732335
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082732333}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1141003808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1526,7 +1552,7 @@ PrefabInstance:
     - target: {fileID: 2340296072003890295, guid: 8c46bcd3b445cca4b8763e01dc3067e9,
         type: 3}
       propertyPath: _active
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c46bcd3b445cca4b8763e01dc3067e9, type: 3}
@@ -1867,7 +1893,7 @@ PrefabInstance:
     - target: {fileID: 2340296072003890295, guid: 8c46bcd3b445cca4b8763e01dc3067e9,
         type: 3}
       propertyPath: _active
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c46bcd3b445cca4b8763e01dc3067e9, type: 3}

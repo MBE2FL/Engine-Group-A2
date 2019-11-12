@@ -10,6 +10,8 @@ TagManager:
   - Target1
   - Target2
   - wall
+  - TBunny
+  - TBun
   layers:
   - Default
   - TransparentFX
